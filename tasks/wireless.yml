@@ -1,0 +1,55 @@
+# https://openwrt.org/docs/guide-user/network/wifi/basic
+
+- name: Configure Wi-Fi SSID
+  uci:
+    command: set
+    key: wireless.@wifi-iface[0]
+    value:
+      ssid: "{{ ssid }}"
+  when: ssid is defined
+  notify:
+  - uci commit
+  - wifi reload
+
+- name: Configure Wi-Fi Key
+  uci:
+    command: set
+    key: wireless.@wifi-iface[0]
+    value:
+      key: "{{ key }}"
+  when: key is defined
+  notify:
+  - uci commit
+  - wifi reload
+
+- name: Configure Wi-Fi Encryption
+  uci:
+    command: set
+    key: wireless.@wifi-iface[0]
+    value:
+      encryption: "{{ encryption }}"
+  when: encryption is defined
+  notify:
+  - uci commit
+  - wifi reload
+
+- name: Configure Wi-Fi Channel
+  uci:
+    command: set
+    key: wireless.@wifi-device[0]
+    value:
+      channel: "{{ channel }}"
+  when: channel is defined
+  notify:
+  - uci commit
+  - wifi reload
+
+- name: Enable Wi-Fi
+  uci:
+    command: set
+    key: wireless.@wifi-iface[0]
+    value:
+      disabled: '0'
+  notify:
+  - uci commit
+  - wifi reload

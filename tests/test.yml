@@ -1,0 +1,20 @@
+#!/usr/bin/env ansible-playbook
+---
+- hosts: openwrt
+  remote_user: root
+  gather_facts: no
+  roles:
+    - name: ../..
+
+      # Dropbear
+      # ssh_public_key: ""
+
+      # Wireless
+      # ssid: ""
+      # key: ""
+      # encryption: psk2
+      # channel: auto
+
+      # Network
+      # ipaddr: 192.168.8.1
+      # netmask: 255.255.255.0

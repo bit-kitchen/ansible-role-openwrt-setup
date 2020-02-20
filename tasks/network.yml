@@ -1,0 +1,31 @@
+# https://openwrt.org/docs/guide-user/base-system/basic-networking
+
+- name: Set LAN IP address
+  uci:
+    command: section
+    config: network
+    type: interface
+    find_by:
+      type: bridge
+      ifname: eth0.1
+    value:
+      ipaddr: "{{ ipaddr }}"
+  when: ipaddr is defined
+  notify:
+  - uci commit
+  - network reload
+
+- name: Set LAN IP netmask
+  uci:
+    command: section
+    config: network
+    type: interface
+    find_by:
+      type: bridge
+      ifname: eth0.1
+    value:
+      netmask: "{{ netmask }}"
+  when: netmask is defined
+  notify:
+  - uci commit
+  - network reload

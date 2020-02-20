@@ -1,0 +1,17 @@
+---
+- name: uci commit
+  uci:
+    command: commit
+
+- name: dropbear restart
+  service:
+    name: dropbear
+    state: restarted
+
+- name: wifi reload
+  command: wifi
+
+- name: network reload
+  service:
+    name: network
+    state: reloaded

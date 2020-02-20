@@ -1,0 +1,19 @@
+# https://openwrt.org/docs/guide-user/base-system/dropbear
+
+- name: Add SSH public key
+  lineinfile:
+    path: /etc/dropbear/authorized_keys
+    line: "{{ ssh_public_key }}"
+  notify:
+    - dropbear restart
+
+- name: Disable password authentication
+  uci:
+    command: set
+    key: dropbear.@dropbear[0]
+    value:
+      PasswordAuth: "off"
+      RootPasswordAuth: "off"
+  notify:
+    - uci commit
+    - dropbear restart
