@@ -1,6 +1,8 @@
 ---
 - import_tasks: dropbear.yml
-  when: ssh_public_key is defined
+  when: >
+    ssh_public_key is defined
+    or ssh_port is defined
 
 - import_tasks: wireless.yml
   when: >

@@ -7,6 +7,7 @@
     - name: ../..
 
       # Dropbear
+      # ssh_port: 22
       # ssh_public_key: ""
 
       # Wireless
