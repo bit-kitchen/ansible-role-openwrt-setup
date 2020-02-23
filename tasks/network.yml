@@ -29,3 +29,17 @@
   notify:
   - uci commit
   - network reload
+
+- name: Configure IPv6
+  uci:
+    command: section
+    config: network
+    type: interface
+    find_by:
+      proto: dhcpv6
+    value:
+      auto: "{{ '0' if ipv6_disabled else '1' }}"
+  when: ipv6_disabled is defined
+  notify:
+  - uci commit
+  - network reload
