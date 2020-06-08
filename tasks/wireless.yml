@@ -27,8 +27,10 @@
     command: set
     key: wireless.@wifi-iface[{{ wifi_index }}]
     value:
-      encryption: "{{ encryption }}"
-  when: encryption is defined
+      encryption: "{{ encryption | default('psk2', true) }}"
+  when: >
+    encryption is defined
+    or key is defined
   notify:
   - uci commit
   - wifi reload
