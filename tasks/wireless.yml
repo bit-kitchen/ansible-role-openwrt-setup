@@ -3,7 +3,7 @@
 - name: Configure Wi-Fi SSID
   uci:
     command: set
-    key: wireless.@wifi-iface[0]
+    key: wireless.@wifi-iface[{{ wifi_index }}]
     value:
       ssid: "{{ ssid }}"
   when: ssid is defined
@@ -14,7 +14,7 @@
 - name: Configure Wi-Fi Key
   uci:
     command: set
-    key: wireless.@wifi-iface[0]
+    key: wireless.@wifi-iface[{{ wifi_index }}]
     value:
       key: "{{ key }}"
   when: key is defined
@@ -25,7 +25,7 @@
 - name: Configure Wi-Fi Encryption
   uci:
     command: set
-    key: wireless.@wifi-iface[0]
+    key: wireless.@wifi-iface[{{ wifi_index }}]
     value:
       encryption: "{{ encryption }}"
   when: encryption is defined
@@ -36,7 +36,7 @@
 - name: Configure Wi-Fi Channel
   uci:
     command: set
-    key: wireless.@wifi-device[0]
+    key: wireless.@wifi-device[{{ wifi_index }}]
     value:
       channel: "{{ channel }}"
   when: channel is defined
@@ -47,7 +47,7 @@
 - name: Enable Wi-Fi
   uci:
     command: set
-    key: wireless.@wifi-device[0]
+    key: wireless.@wifi-device[{{ wifi_index }}]
     value:
       disabled: '0'
   notify:

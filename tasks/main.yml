@@ -8,8 +8,16 @@
 - import_tasks: passwd.yml
   when: passwd is defined
 
-- name: Include tasks for wireless
-  include_tasks: wireless.yml
+- block:
+  - name: Include tasks for wireless 1
+    include_tasks: wireless.yml
+    vars:
+      wifi_index: 1
+  always:
+  - name: Include tasks for wireless 0
+    include_tasks: wireless.yml
+    vars:
+      wifi_index: 0
   when: >
     ssid is defined
     or key is defined
