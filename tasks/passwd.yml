@@ -1,0 +1,2 @@
+- name: Configure root/LuCI password
+  shell: printf '%s\n%s\n' '{{ passwd }}' '{{ passwd }}' | (passwd)

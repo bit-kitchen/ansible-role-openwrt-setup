@@ -10,6 +10,9 @@
       # ssh_port: 22
       # ssh_public_key: ""
 
+      # Root/LuCI Password
+      # passwd: ""
+
       # Wireless
       # ssid: ""
       # key: ""
