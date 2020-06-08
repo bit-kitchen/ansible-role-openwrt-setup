@@ -47,7 +47,7 @@
 - name: Enable Wi-Fi
   uci:
     command: set
-    key: wireless.@wifi-iface[0]
+    key: wireless.@wifi-device[0]
     value:
       disabled: '0'
   notify:
