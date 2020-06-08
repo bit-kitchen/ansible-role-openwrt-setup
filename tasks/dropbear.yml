@@ -15,6 +15,10 @@
   lineinfile:
     path: /etc/dropbear/authorized_keys
     line: "{{ ssh_public_key }}"
+    create: yes
+    owner: root
+    group: root
+    mode: '0600'
   notify:
     - dropbear restart
   when: ssh_public_key is defined
