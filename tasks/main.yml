@@ -1,5 +1,6 @@
 ---
-- import_tasks: dropbear.yml
+- name: Include tasks for dropbear
+  include_tasks: dropbear.yml
   when: >
     ssh_public_key is defined
     or ssh_port is defined
@@ -7,14 +8,16 @@
 - import_tasks: passwd.yml
   when: passwd is defined
 
-- import_tasks: wireless.yml
+- name: Include tasks for wireless
+  include_tasks: wireless.yml
   when: >
     ssid is defined
     or key is defined
     or encryption is defined
     or channel is defined
 
-- import_tasks: network.yml
+- name: Include tasks for networking
+  include_tasks: network.yml
   when: >
     ipaddr is defined
     or netmask is defined
