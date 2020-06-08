@@ -48,4 +48,6 @@ galaxy_info:
     #       Maximum 20 tags per role.
 
 dependencies:
-  - gekmihesg.openwrt
+  - role: gekmihesg.openwrt
+    vars:
+      openwrt_install_recommended_packages: no
