@@ -5,9 +5,9 @@
     command: section
     config: network
     type: interface
+    name: lan
     find_by:
       type: bridge
-      ifname: eth0.1
     value:
       ipaddr: "{{ ipaddr }}"
   when: ipaddr is defined
@@ -20,9 +20,9 @@
     command: section
     config: network
     type: interface
+    name: lan
     find_by:
       type: bridge
-      ifname: eth0.1
     value:
       netmask: "{{ netmask }}"
   when: netmask is defined
