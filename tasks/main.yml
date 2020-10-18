@@ -1,4 +1,7 @@
 ---
+- include_tasks: system.yml
+  when: zonename is defined
+
 - name: Include tasks for dropbear
   include_tasks: dropbear.yml
   when: >

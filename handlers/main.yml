@@ -3,6 +3,11 @@
   uci:
     command: commit
 
+- name: system reload
+  service:
+    name: system
+    state: reloaded
+
 - name: dropbear restart
   service:
     name: dropbear

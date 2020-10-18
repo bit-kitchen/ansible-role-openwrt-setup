@@ -1,0 +1,28 @@
+- name: Find Timezone
+  shell:
+    lua -l 'luci.sys.zoneinfo.tzdata' -e '
+    for k,v in ipairs(luci.sys.zoneinfo.tzdata.TZ) do
+      if v[1] == "{{zonename}}" then
+        print(v[2])
+      end
+    end
+    '
+  register: _timezone
+  changed_when: no
+  when:
+  - timezone is undefined
+  - zonename is defined
+
+- name: Set Zonename & Timezone
+  uci:
+    command: set
+    key: system.@system[0]
+    value:
+      zonename: "{{ zonename }}"
+      timezone: "{{ timezone | default(_timezone.stdout, true) }}"
+  notify:
+  - uci commit
+  - system reload
+  when:
+  - zonename is defined
+  - timezone is defined or _timezone.stdout is defined
