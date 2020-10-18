@@ -1,6 +1,13 @@
 ansible-role-openwrt-setup
 ==========================
 
+[![Ansible Role: bit_kitchen.openwrt_setup](https://img.shields.io/ansible/role/51330.svg)](https://galaxy.ansible.com/bit_kitchen/openwrt_setup)
+[![Build Status: bit-kitchen/ansible-role-openwrt-setup](https://travis-ci.org/bit-kitchen/ansible-role-openwrt-setup.svg?branch=master)](https://travis-ci.org/bit-kitchen/ansible-role-openwrt-setup)
+
+```sh
+ansible-galaxy install bit_kitchen.openwrt_setup
+```
+
 An ansible role that sets up OpenWrt routers. Python NOT requried on OpenWrt routers.
 
 Requirements
