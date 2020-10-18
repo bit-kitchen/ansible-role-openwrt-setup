@@ -1,38 +1,88 @@
-Role Name
-=========
+ansible-role-openwrt-setup
+==========================
 
-A brief description of the role goes here.
+An ansible role that sets up OpenWrt routers. Python NOT requried on OpenWrt routers.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+None.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+| variable      | Note
+| ------------- | ----
+| **System**
+| `zonename`    | Examples: `UTC`, `America/Los Angeles`, `Asia/Hong Kong`. <br> Check all available timezones at <http://openwrt.lan/cgi-bin/luci/admin/system/system>
+| **Dropbear**
+| `ssh_port` | SSH port
+| `ssh_public_key` | SSH public key allowed for passwordless SSH login. <br> **Note:** When a key is added, password authentication for SSH will be disabled.
+| **Root/LuCI Password**
+| `passwd` | The root password used for command line and LuCI.
+| **Wireless** | Wireless variables apply to both 2.4G and 5G
+| `ssid` | Wi-Fi Name
+| `key` | Wi-Fi Password
+| `encryption` | `sae`, `sae-mixed`, `psk2`, `psk-mixed`, `psk`, `wpa`, `none`
+| `channel` | `auto` or channel number
+| **Network**
+| `ipaddr` | LAN IPv4 address
+| `netmask` | LAN IPv4 netmask
+| `ipv6_disabled` | Whether to disable IPv6
+
+**Note:** All variables are undefined by default. Unless a variable is set, no related tasks will be carried out.
+
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+This role depends on the [`gekmihesg.openwrt`](https://github.com/gekmihesg/ansible-openwrt) ansible role, so that python on OpenWrt becomes a non-requirement.
+
+Example Inventory
+----------------
+
+**Note:** All OpenWrt hosts must be put under `openwrt` group.
+
+```
+[openwrt]
+openwrt.lan
+```
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+```yml
+- hosts: openwrt
+  remote_user: root
+  roles:
+    - name: bit_kitchen.openwrt_setup
+      # System
+      zonename: "America/Los Angeles"
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+      # Dropbear
+      ssh_port: 2222
+      ssh_public_key: "ssh-rsa AAAAB3Nz...4Fq/k="
+
+      # Root/LuCI Password
+      passwd: "MySecretP@ss!"
+
+      # Wireless
+      ssid: "OpenWrt"
+      key: "MyWiFiMyPass"
+      encryption: psk2
+      channel: auto
+
+      # Network
+      ipaddr: 10.20.30.1
+      netmask: 255.255.255.0
+```
 
 License
 -------
 
-BSD
+[MIT](LICENSE)
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+[bit.kitchen](https://github.com/bit-kitchen)
